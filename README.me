@@ -1,0 +1,25 @@
+EventBust
+
+EventBus permite la publicación-suscripción al estilo de comunicación entre los componentes sin necesidad de los componentes para registrar de manera explícita entre sí (y por lo tanto ser conscientes el uno del otro). Está diseñado exclusivamente para sustituir a la distribución tradicional de Java en proceso de sucesos mediante registro explícito. Es no un sistema de publicación-suscripción de propósito general, ni se pretende para la comunicación entre procesos.
+
+Como radica en nuestra APP la biblioteca EventBust:
+Para detectar un sabor específico de evento (por ejemplo, un CustomerChangeEvent):
+
+En los eventos tradicionales de Java: implementar una interfaz definida con el evento - como CustomerChangeEventListener.
+
+Con EventBus: crear un método que acepta CustomerChangeEventcomo su único argumento, con la marca de la @Subscribeanotación.
+Para registrar sus métodos de detectores con los productores de eventos:
+
+En los eventos tradicionales de Java: pasar su objeto a cada productor del registerCustomerChangeEventListenermétodo. Estos métodos son raramente definen en las interfaces comunes, lo que además de conocer cada productor sea posible, también debe conocer su tipo.
+
+Con EventBus: pasar el objeto en el EventBus.register(Object)método en un EventBus. Tendrá que asegurarse de que su objeto comparte una EventBusinstancia con los productores de eventos.
+Para escuchar para un supertipo evento común (por ejemplo, EventObjecto Object):
+
+En los eventos tradicionales de Java: no es fácil.
+
+Con EventBus: eventos se distribuyen automáticamente a los oyentes de cualquier supertipo, lo que permite a los oyentes para tipos de interfaz o "comodín" para los oyentes Object.
+Para escuchar y detectar eventos que fueron enviadas sin oyentes:
+
+En los eventos tradicionales de Java: agregar código para cada método de despacho de eventos (tal vez usando AOP).
+
+Con EventBus: suscribirse DeadEvent. El EventBusle notificará de cualquier evento que se contabilizaron pero no entregados. (Útil para la depuración.)
